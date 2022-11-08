@@ -111,8 +111,7 @@ public class Player : MonoBehaviour
         movY = Input.GetAxis("Vertical");
         Vector3 inputJugador = new Vector3(-movX, 0, -movY);
         rb.AddForce(inputJugador * speed * Time.fixedDeltaTime);
-        // rb2.AddForce(inputJugador * speed * Time.fixedDeltaTime);
-        
+       
     }
 
     void OnCollisionEnter(Collision col)
@@ -124,7 +123,6 @@ public class Player : MonoBehaviour
         }
         if (col.transform.gameObject.tag=="Abyss" || col.transform.gameObject.tag=="Spike")
         {
-            // PierdeVida();
            Debug.Log("Pierde Vida!");
            vidas--;
            spawnPoint=startPoint;
@@ -142,22 +140,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    // void OnTriggerEnter(Collider col) 
-    // {
-        // if (col.CompareTag("Abyss"))
-        // {
-            // PierdeVida();
-        // }
-    // }
-
+       
     void PierdeVida()
     {
         Debug.Log("Pierde Vida!");
         vidas--;
         spawnPoint=startPoint;
         tipoPelota=(TipoPelota)0;
-        // TipoPlayer(tipoPelota);
-        
+    
     }
 
     void TipoPlayer(TipoPelota tipoPelota)
@@ -208,10 +198,5 @@ public class Player : MonoBehaviour
                 break;            
         }
         humo.transform.position=spawnPoint;
-        // pelotaFutbol.transform.position=new Vector3(0,0,0);
-        // pelotaTenis.transform.position=new Vector3(0,0,0);
-        // pelotaBowling.transform.position=new Vector3(0,0,0);
-        // pelotaBasket.transform.position=new Vector3(0,0,0);
-        // 
-    }
+         }
 }
