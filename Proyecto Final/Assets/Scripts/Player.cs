@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         {
             isInGround=true;
         }
-        if (col.transform.gameObject.tag=="Abyss")
+        if (col.transform.gameObject.tag=="Abyss" || col.transform.gameObject.tag=="Spike")
         {
             // PierdeVida();
            Debug.Log("Pierde Vida!");

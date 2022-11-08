@@ -1,18 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikeWall : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    public float timer;
+    public float topeArriba;
+    public float topeAbajo;
+    public bool abajo;
+    public float speed;
+
+
     void Start()
     {
-        
+     timer=2f;
+     abajo=true;
+     speed=5f;   
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        timer-=Time.deltaTime;
+        if(timer<=0)
+        {
+            if(abajo){
+                transform.Translate(Vector3.down * Time.deltaTime * speed, Space.World);
+                if(transform.position.y<=topeAbajo)
+                {
+                    timer=2f;
+                    abajo=false;
+                }
+            }else{
+                transform.Translate(Vector3.up * Time.deltaTime * speed , Space.World);
+                if(transform.position.y>=topeArriba)
+                {
+                    timer=2f;
+                    abajo=true;
+                }   
+            }
+        }
     }
 }

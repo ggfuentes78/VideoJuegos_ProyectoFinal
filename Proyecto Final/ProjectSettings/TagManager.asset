@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Abyss
+  - Spike
   layers:
   - Default
   - TransparentFX
