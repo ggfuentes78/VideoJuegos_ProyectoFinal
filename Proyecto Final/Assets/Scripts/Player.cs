@@ -1,103 +1,84 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class Player : MonoBehaviour
+public class Player : Pelota
 {
-    private float movX;
-    private float movY;
-
-    public float speed = 8f;
-    public float jumpForce = 7f;
-
-    public Rigidbody rb;
     public Rigidbody rb2;
     public bool isInGround;
+
+    public SphereCollider playerCollider;
 
     public GameObject pelotaFutbol;
     public GameObject pelotaTenis;
     public GameObject pelotaBasket;
     public GameObject pelotaBowling;
     public ParticleSystem humo;
-    private GameObject vcam;
-    public Vector3 spawnPoint;
-    public int vidas;
-    public Vector3 startPoint;
+    public static int vidas;
+    public static float timer;
  
 
-    public enum TipoPelota
-    {
-        Futbol,
-        Tenis,
-        Bowling,
-        Basket
-    };
-
-    public TipoPelota tipoPelota;
-
-
-    // Start is called before the first frame update
     void Start()
     {
         startPoint= transform.position;
         spawnPoint=transform.position;
         tipoPelota=(TipoPelota)0;
         vidas=3;
+        timer=0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(vidas>0){
-            if (Input.GetKeyDown(KeyCode.Space)&&isInGround)
-            {
-                rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce, ForceMode.Impulse);
-            }
+        timer+=Time.deltaTime;
+            // if (Input.GetKeyDown(KeyCode.Space)&&isInGround)
+            // {
+                // Saltar();
+            // }
             if (Input.GetKeyDown(KeyCode.X))
             {
                 spawnPoint=pelotaFutbol.transform.position;
-                humo.Play();
                 tipoPelota=(TipoPelota)1;
+                // humo.Play();
             }else{
                 if(Input.GetKeyDown(KeyCode.C))
                 {
                     spawnPoint=pelotaFutbol.transform.position;
-                    humo.Play();
                     tipoPelota=(TipoPelota)2;
+                    // humo.Play();
                 }else{
                     if(Input.GetKeyDown(KeyCode.Z))
                     {
                         spawnPoint=pelotaFutbol.transform.position;
-                        humo.Play();
                         tipoPelota=(TipoPelota)3;
+                        // humo.Play();
                     }
                 }
             }
-
+ 
             if(Input.GetKeyUp(KeyCode.Z))
             {
                 spawnPoint=pelotaBasket.transform.position;
-                humo.Play();
                 tipoPelota=(TipoPelota)0;
+                // humo.Play();
             }else{
                 if(Input.GetKeyUp(KeyCode.X))
                 {
                     spawnPoint=pelotaTenis.transform.position;
-                    humo.Play();
                     tipoPelota=(TipoPelota)0;
+                    // humo.Play();
                 }else{
                     if(Input.GetKeyUp(KeyCode.C))
                     {
                         spawnPoint=pelotaBowling.transform.position;
-                        humo.Play();
                         tipoPelota=(TipoPelota)0;
+                        // humo.Play();
                     }
                 }
             }
-
+// 
             TipoPlayer(tipoPelota);
-        }else{
-            Debug.Log("GAME OVER");
-        }
-    }
+            // humo.Play();
+       }
 
     void FixedUpdate()
     {
@@ -105,35 +86,18 @@ public class Player : MonoBehaviour
     }
 
 
-    void MovimientoJugador()
-    {
-        movX = Input.GetAxis("Horizontal");
-        movY = Input.GetAxis("Vertical");
-        Vector3 inputJugador = new Vector3(-movX, 0, -movY);
-        rb.AddForce(inputJugador * speed * Time.fixedDeltaTime);
-       
-    }
-
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log("COLISIONO CON " + col.transform.gameObject.tag);
+        Debug.Log(this.transform.name+ "COLISIONO CON " + col.transform.gameObject.tag);
         if (col.transform.gameObject.tag=="Ground")
         {
             isInGround=true;
-        }
-        if (col.transform.gameObject.tag=="Abyss" || col.transform.gameObject.tag=="Spike")
-        {
-           Debug.Log("Pierde Vida!");
-           vidas--;
-           spawnPoint=startPoint;
-           tipoPelota=(TipoPelota)0;
-           pelotaFutbol.transform.position=startPoint;
         }
     }
 
     void OnCollisionExit(Collision col)
     {
-        Debug.Log("SALGO DE COLISIONAR CON " + col.transform.gameObject.tag);
+        Debug.Log(this.transform.name + "SALGO DE COLISIONAR CON " + col.transform.gameObject.tag);
         if (col.transform.gameObject.tag=="Ground")
         {
             isInGround=false;
@@ -141,16 +105,16 @@ public class Player : MonoBehaviour
     }
 
        
-    void PierdeVida()
+    public void PierdeVida()
     {
         Debug.Log("Pierde Vida!");
         vidas--;
         spawnPoint=startPoint;
         tipoPelota=(TipoPelota)0;
-    
+        pelotaFutbol.transform.position=startPoint;
     }
 
-    void TipoPlayer(TipoPelota tipoPelota)
+    public void TipoPlayer(TipoPelota tipoPelota)
     {
         switch(tipoPelota)
         {
@@ -162,9 +126,8 @@ public class Player : MonoBehaviour
                      pelotaFutbol.transform.position=spawnPoint;
                 }
                 pelotaFutbol.SetActive(true);
-               
                 rb=pelotaFutbol.GetComponent<Rigidbody>();
-
+                playerCollider=pelotaFutbol.GetComponent<SphereCollider>();
                 break;
             case TipoPelota.Tenis:
                 pelotaFutbol.SetActive(false);
@@ -175,6 +138,7 @@ public class Player : MonoBehaviour
                 }                
                 pelotaTenis.SetActive(true);
                 rb=pelotaTenis.GetComponent<Rigidbody>();
+                playerCollider=pelotaTenis.GetComponent<SphereCollider>();
                 break;
             case TipoPelota.Bowling:
                 pelotaFutbol.SetActive(false);
@@ -185,6 +149,7 @@ public class Player : MonoBehaviour
                 }
                 pelotaBowling.SetActive(true);
                 rb=pelotaBowling.GetComponent<Rigidbody>();
+                playerCollider=pelotaBowling.GetComponent<SphereCollider>();
                 break;
             case TipoPelota.Basket:
                 pelotaFutbol.SetActive(false);
@@ -195,8 +160,10 @@ public class Player : MonoBehaviour
                 }
                 pelotaBasket.SetActive(true);
                 rb=pelotaBasket.GetComponent<Rigidbody>();
+                playerCollider=pelotaBasket.GetComponent<SphereCollider>();
                 break;            
         }
+        Debug.Log("HUMO"+ humo.transform.position);
         humo.transform.position=spawnPoint;
-         }
+        }
 }
