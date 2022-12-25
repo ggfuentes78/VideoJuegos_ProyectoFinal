@@ -5,7 +5,11 @@ using TMPro;
 public class Player : Pelota
 {
     public Rigidbody rb2;
-    public bool isInGround;
+    // public bool isInGround;
+    public GameObject camFutbol;
+    public GameObject camTenis;
+    public GameObject camBowling;
+    public GameObject camBasket;
 
     public SphereCollider playerCollider;
 
@@ -88,7 +92,6 @@ public class Player : Pelota
 
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log(this.transform.name+ "COLISIONO CON " + col.transform.gameObject.tag);
         if (col.transform.gameObject.tag=="Ground")
         {
             isInGround=true;
@@ -126,6 +129,10 @@ public class Player : Pelota
                      pelotaFutbol.transform.position=spawnPoint;
                 }
                 pelotaFutbol.SetActive(true);
+                camFutbol.SetActive(true);
+                camBasket.SetActive(false);
+                camTenis.SetActive(false);
+                camBowling.SetActive(false);
                 rb=pelotaFutbol.GetComponent<Rigidbody>();
                 playerCollider=pelotaFutbol.GetComponent<SphereCollider>();
                 break;
@@ -137,6 +144,10 @@ public class Player : Pelota
                      pelotaTenis.transform.position=spawnPoint;
                 }                
                 pelotaTenis.SetActive(true);
+                camTenis.SetActive(true);
+                camBasket.SetActive(false);
+                camFutbol.SetActive(false);
+                camBowling.SetActive(false);
                 rb=pelotaTenis.GetComponent<Rigidbody>();
                 playerCollider=pelotaTenis.GetComponent<SphereCollider>();
                 break;
@@ -148,6 +159,10 @@ public class Player : Pelota
                      pelotaBowling.transform.position=spawnPoint;
                 }
                 pelotaBowling.SetActive(true);
+                camBowling.SetActive(true);
+                camBasket.SetActive(false);
+                camTenis.SetActive(false);
+                camFutbol.SetActive(false);
                 rb=pelotaBowling.GetComponent<Rigidbody>();
                 playerCollider=pelotaBowling.GetComponent<SphereCollider>();
                 break;
@@ -159,11 +174,15 @@ public class Player : Pelota
                      pelotaBasket.transform.position=spawnPoint;
                 }
                 pelotaBasket.SetActive(true);
+                camFutbol.SetActive(false);
+                camTenis.SetActive(false);
+                camBowling.SetActive(false);
+                camBasket.SetActive(true);
                 rb=pelotaBasket.GetComponent<Rigidbody>();
                 playerCollider=pelotaBasket.GetComponent<SphereCollider>();
                 break;            
         }
-        Debug.Log("HUMO"+ humo.transform.position);
+        // Debug.Log("HUMO"+ humo.transform.position);
         humo.transform.position=spawnPoint;
         }
 }

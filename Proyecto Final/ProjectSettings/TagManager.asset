@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Abyss
   - Spike
+  - Ice
+  - Hand
+  - Arco
   layers:
   - Default
   - TransparentFX

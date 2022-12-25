@@ -6,6 +6,7 @@ public class Pelota : MonoBehaviour
 {
     private float movX;
     private float movY;
+    public bool isInGround;
 
     public float speed = 8f;
     public float jumpForce = 7f;
@@ -48,7 +49,10 @@ public class Pelota : MonoBehaviour
 
     public void Saltar()
     {
-        rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce, ForceMode.Impulse);
+        if (isInGround)
+        {        
+            rb.AddForce(new Vector3(0f, 1f, 0f) * jumpForce, ForceMode.Impulse);
+        }
     }
 
 }

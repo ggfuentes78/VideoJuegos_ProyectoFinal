@@ -4,13 +4,24 @@ using UnityEngine.Events;
 public class PlayerEvents : MonoBehaviour
 {
     [SerializeField] private UnityEvent pierdeVida;
+    [SerializeField] private UnityEvent pisaHielo;
+    [SerializeField] private UnityEvent golazo;
 
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log("COLISIONO CON " + col.transform.gameObject.tag);
+        Debug.Log("EVENTO - COLISIONO CON " + col.transform.gameObject.tag);
         if (col.transform.gameObject.tag=="Abyss" || col.transform.gameObject.tag=="Spike")
         {
             pierdeVida.Invoke();
+        }
+        if (col.transform.gameObject.tag=="Ice")
+        {
+            pisaHielo.Invoke();
+        }
+        if (col.transform.gameObject.tag=="Arco")
+        {
+            Debug.Log("GOOOOOOOOOL");
+            golazo.Invoke();
         }
     }
 

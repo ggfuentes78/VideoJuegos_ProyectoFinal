@@ -989,7 +989,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 6.0782123, y: 1}
+    m_SensorSize: {x: 2.073846, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1625,20 +1625,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5893fe5b92f6154988a7a2ca82b7230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInGround: 1
   speed: 200
   jumpForce: 10
   rb: {fileID: 456779082}
+  spawnPoint: {x: 0, y: 0, z: 0}
+  startPoint: {x: 0, y: 0, z: 0}
+  tipoPelota: 0
   rb2: {fileID: 456779082}
-  isInGround: 1
+  camFutbol: {fileID: 0}
+  camTenis: {fileID: 0}
+  camBowling: {fileID: 0}
+  camBasket: {fileID: 0}
+  playerCollider: {fileID: 0}
   pelotaFutbol: {fileID: 660714071}
   pelotaTenis: {fileID: 1765039105}
   pelotaBasket: {fileID: 1205258459}
   pelotaBowling: {fileID: 1030803218}
   humo: {fileID: 1710287819}
-  spawnPoint: {x: 0, y: 0, z: 0}
-  vidas: 0
-  startPoint: {x: 0, y: 0, z: 0}
-  tipoPelota: 0
 --- !u!65 &456779084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2214,20 +2218,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5893fe5b92f6154988a7a2ca82b7230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInGround: 0
   speed: 200
   jumpForce: 10
   rb: {fileID: 456779082}
+  spawnPoint: {x: 0, y: 0, z: 0}
+  startPoint: {x: 0, y: 0, z: 0}
+  tipoPelota: 0
   rb2: {fileID: 456779082}
-  isInGround: 0
+  camFutbol: {fileID: 0}
+  camTenis: {fileID: 0}
+  camBowling: {fileID: 0}
+  camBasket: {fileID: 0}
+  playerCollider: {fileID: 0}
   pelotaFutbol: {fileID: 660714071}
   pelotaTenis: {fileID: 1765039105}
   pelotaBasket: {fileID: 1205258459}
   pelotaBowling: {fileID: 1030803218}
   humo: {fileID: 1710287819}
-  spawnPoint: {x: 0, y: 0, z: 0}
-  vidas: 0
-  startPoint: {x: 0, y: 0, z: 0}
-  tipoPelota: 0
 --- !u!1001 &668459077
 PrefabInstance:
   m_ObjectHideFlags: 0

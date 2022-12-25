@@ -11,6 +11,9 @@ public class HUD : MonoBehaviour
     public GameObject menuPausa;
     public bool pausaActiva;
 
+    [Header ("Menu Lvl Finished")]
+    public GameObject menuLvlFinished;
+
     [Header ("Game Over")]
     public GameObject menuGameOver;
 
@@ -77,12 +80,27 @@ public class HUD : MonoBehaviour
         menuGameOver.SetActive(true);
     }
 
-    public void VolverAlMenu(){
+    public void HUDLvlFinished()
+    {
+        HUDGame.SetActive(false);
+        menuLvlFinished.SetActive(true);
+        Time.timeScale=0;
+        
+    }
+
+    public void VolverAlMenu()
+    {
         SceneManager.LoadScene(0);
     }
 
-    public void Restart(){
+    public void Restart()
+    {
         SceneManager.LoadScene(1);
+    }
+
+    public void CargaLvl(int scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 
 }
